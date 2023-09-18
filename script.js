@@ -1,6 +1,14 @@
+const calculatorButtons = document.querySelectorAll(".number-button")
+const calculatorDisplay = document.querySelector(".calculator-display")
+
+const delBtn = document.querySelector("#del")
+const resetBtn = document.querySelector("#reset")
+
 let firstNumber;
 let operator;
 let secondNumber;
+
+let displayValue;
 
 function add(firstNumber, secondNumber) {
   return firstNumber + secondNumber;
@@ -11,7 +19,7 @@ function subtract(firstNumber, secondNumber) {
 }
 
 function multiply(firstNumber, secondNumber) {
-  return firstNumber * secondNumber;
+  return firstNumber * secondNumber; 
 }
 
 function divide(firstNumber, secondNumber) {
@@ -31,6 +39,20 @@ function operate(firstNumber, secondNumber, operator) {
   }
 }
 
-//Testing the operate function
+calculatorButtons.forEach(function(button) {
+  if(button.textContent !== "RESET" && button.textContent !== "DEL" && button.textContent !== "=") {
+    button.addEventListener('click', function() {
+      displayValue = calculatorDisplay.textContent += button.textContent
+    })
+  }
+})
 
-console.log(operate(4, 2, "divide")); // result shoud be 8
+resetBtn.addEventListener('click', function() {
+  displayValue = "";
+  calculatorDisplay.textContent = displayValue
+})
+
+delBtn.addEventListener('click', function() {
+  displayValue = displayValue.slice(0,-1);
+  calculatorDisplay.textContent = displayValue
+});

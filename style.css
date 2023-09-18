@@ -22,9 +22,10 @@ body {
   background-color: #181f32;
   color: white;
   margin-bottom: 35px;
-  padding: 75px 35px ;
-  width: 580px;
+  padding: 70px 30px ;
+  width: 595px;
   border-radius: 10px;
+  font-size: 50px;
 }
 
 .calculator-body {
@@ -59,7 +60,8 @@ button {
   font-weight: 700;
 }
 
-button#clear {
+button#del,
+button#reset {
   background-color: #647299;
   color: white;
 }
