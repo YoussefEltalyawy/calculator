@@ -3,6 +3,7 @@ const calculatorDisplay = document.querySelector(".calculator-display")
 
 const delBtn = document.querySelector("#del")
 const resetBtn = document.querySelector("#reset")
+const equals = document.querySelector("#equals")
 
 let firstNumber;
 let operator;
@@ -28,13 +29,13 @@ function divide(firstNumber, secondNumber) {
 
 function operate(firstNumber, secondNumber, operator) {
   switch (operator) {
-    case "add":
+    case "+":
       return add(firstNumber, secondNumber);
-    case "subtract":
+    case "-":
       return subtract(firstNumber, secondNumber);
-    case "multiply":
+    case "x":
       return multiply(firstNumber, secondNumber);
-    case "divide":
+    case "/":
       return divide(firstNumber, secondNumber);
   }
 }
@@ -54,5 +55,28 @@ resetBtn.addEventListener('click', function() {
 
 delBtn.addEventListener('click', function() {
   displayValue = displayValue.slice(0,-1);
+  calculatorDisplay.textContent = displayValue
+});
+
+equals.addEventListener('click', function() {
+  let operatorPosition;
+  let firstNumberStr = "";
+  let secondNumberStr = "";
+
+  for(let i = 0; i < displayValue.length; i++) {
+    const character = displayValue.charAt(i)
+    if(character == '+' || character == '-' || character == 'x' || character == '/') {
+      console.log(character)
+      operator = character
+      operatorPosition = i
+      break;
+    }
+    
+  }
+  firstNumberStr = displayValue.substring(0,operatorPosition);
+  console.log(firstNumberStr)
+  secondNumberStr = displayValue.substring(operatorPosition + 1)
+  console.log(secondNumberStr)
+  displayValue = operate(Number(firstNumberStr), Number(secondNumberStr), operator)
   calculatorDisplay.textContent = displayValue
 });
