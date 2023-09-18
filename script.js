@@ -1,23 +1,36 @@
-function add(firstInt, secondInt) {
-  return firstInt + secondInt;
+let firstNumber;
+let operator;
+let secondNumber;
+
+function add(firstNumber, secondNumber) {
+  return firstNumber + secondNumber;
 }
 
-console.log(add(1,2)) //Now we have the fist function which is the add expected: 3
-
-function subtract(firstInt, secondInt) {
-  return firstInt - secondInt;
+function subtract(firstNumber, secondNumber) {
+  return firstNumber - secondNumber;
 }
 
-console.log(subtract(2,1)); // the subtract function works expected: 1
-
-function multiply(firstInt, secondInt) {
-  return firstInt * secondInt
+function multiply(firstNumber, secondNumber) {
+  return firstNumber * secondNumber;
 }
 
-console.log(multiply(5,2)); // the multiply function works expected: 10
-
-function divide(firstInt, secondInt) {
-  return firstInt / secondInt
+function divide(firstNumber, secondNumber) {
+  return firstNumber / secondNumber;
 }
 
-console.log(divide(4,2)); // the divide function works expected: 2
+function operate(firstNumber, secondNumber, operator) {
+  switch (operator) {
+    case "add":
+      return add(firstNumber, secondNumber);
+    case "subtract":
+      return subtract(firstNumber, secondNumber);
+    case "multiply":
+      return multiply(firstNumber, secondNumber);
+    case "divide":
+      return divide(firstNumber, secondNumber);
+  }
+}
+
+//Testing the operate function
+
+console.log(operate(4, 2, "divide")); // result shoud be 8
