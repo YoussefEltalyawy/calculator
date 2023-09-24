@@ -10,8 +10,11 @@ const delBtn = document.querySelector("#del");
 const resetBtn = document.querySelector("#reset");
 const equals = document.querySelector("#equals");
 
+const charactersToCheck = ["+", "-", "/", "x"];
+
 let firstNumber;
-let operator;
+let firstOperator;
+let secondOperator;
 let secondNumber;
 
 let operatorPosition;
@@ -67,9 +70,11 @@ plusBtn.addEventListener('click', function() {
   secondNumberStr = secondNumberStr.slice(0, -1);
   pairBehaviour("+");
 });
+
 minusBtn.addEventListener("click", function () {
-  // parseNumbers();
-  // pairBehaviour("-");
+  parseNumbers();
+  secondNumberStr = secondNumberStr.slice(0, -1);
+  pairBehaviour("-");
 });
 
 multiplyBtn.addEventListener("click", function () {
@@ -83,6 +88,7 @@ divideBtn.addEventListener("click", function () {
   secondNumberStr = secondNumberStr.slice(0, -1);
   pairBehaviour("/");
 });
+
 
 resetBtn.addEventListener("click", function () {
   displayValue = "";
@@ -99,9 +105,9 @@ equals.addEventListener("click", function () {
   displayValue = operate(
     Number(firstNumberStr),
     Number(secondNumberStr),
-    operator
+    firstOperator
   );
-  console.log(firstNumberStr, secondNumberStr, operator);
+  console.log(firstNumberStr, secondNumberStr, firstOperator);
   console.log(displayValue);
   calculatorDisplay.textContent = displayValue;
   isOperationInProgress = false;
@@ -117,13 +123,27 @@ function parseNumbers() {
       character == "x" ||
       character == "/"
     ) {
-      operator = character;
+      firstOperator = character;
       operatorPosition = i;
       break;
     }
+
+    // if (
+    //   character == "+" ||
+    //   character == "-" ||
+    //   character == "x" ||
+    //   character == "/"
+    // ) {
+    //   firstOperator = character;
+    //   operatorPosition = i;
+    //   break;
+    // }
   }
   firstNumberStr = displayValue.substring(0, operatorPosition);
   secondNumberStr = displayValue.substring(operatorPosition + 1);
+
+  secondOperator = secondNumberStr[secondNumberStr.length - 1];
+  console.log(secondOperator + "second operator here the shit work");
 
   if(firstNumberStr && secondNumberStr) {
     console.log(firstNumberStr);
@@ -131,17 +151,17 @@ function parseNumbers() {
     isOperationInProgress = true;
   }
 }
-
-function pairBehaviour() {
+//Function responsible for the pair behaviour (when an operator is clicked twice)
+function pairBehaviour()  {
   if(isOperationInProgress) {
     console.log("busy from function");
+    console.log(firstOperator)
     displayValue = operate(
       Number(firstNumberStr),
       Number(secondNumberStr),
-      operator
+      firstOperator
     );
-    calculatorDisplay.textContent = displayValue;
+    calculatorDisplay.textContent = displayValue + secondOperator;
     isOperationInProgress = false;
-    displayValue = calculatorDisplay.textContent;
   }
 }
