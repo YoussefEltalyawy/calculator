@@ -5,6 +5,7 @@ const plusBtn = document.querySelector("#plus");
 const minusBtn = document.querySelector("#minus");
 const multiplyBtn = document.querySelector("#multiply");
 const divideBtn = document.querySelector("#divide");
+const decimalBtn = document.querySelector("#decimal");
 
 const delBtn = document.querySelector("#del");
 const resetBtn = document.querySelector("#reset");
@@ -50,7 +51,7 @@ function operate(firstNumber, secondNumber, operator) {
       return multiply(firstNumber, secondNumber);
     case "/":
       if (firstNumber === 0) {
-        if(secondNumber === 0) {
+        if (secondNumber === 0) {
           return "Math Error";
         }
       } else {
@@ -61,7 +62,7 @@ function operate(firstNumber, secondNumber, operator) {
 
 calculatorButtons.forEach(function (button) {
   if (
-    button.textContent !== "RESET" &&
+    button.textent !== "RESET" &&
     button.textContent !== "DEL" &&
     button.textContent !== "="
   ) {
@@ -100,8 +101,21 @@ resetBtn.addEventListener("click", function () {
 });
 
 delBtn.addEventListener("click", function () {
+  // Check if the last character is a decimal point and remove it if it is
+  if (displayValue.charAt(displayValue.length - 1) === ".") {
+    decimalBtn.disabled = false; // Re-enable the decimal button
+  }
+
+  // Remove the last character from the displayValue
   displayValue = displayValue.slice(0, -1);
   calculatorDisplay.textContent = displayValue;
+});
+
+decimalBtn.addEventListener("click", function () {
+  if (calculatorDisplay.textContent.includes(".")) {
+    decimalBtn.disabled = true;
+    console.log("Decimal True");
+  }
 });
 
 equals.addEventListener("click", function () {
@@ -160,7 +174,7 @@ function pairBehaviour() {
       Number(secondNumberStr),
       firstOperator
     );
-    
+
     isOperationInProgress = false;
     calculatorDisplay.textContent = displayValue + secondOperator;
     if (displayValue == "Math Error") {
@@ -168,9 +182,8 @@ function pairBehaviour() {
         button.disabled = true;
       });
       resetBtn.disabled = false;
-      calculatorDisplay.textContent = displayValue
+      calculatorDisplay.textContent = displayValue;
     }
-    
   }
 }
 
