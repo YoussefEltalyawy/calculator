@@ -22,11 +22,17 @@ body {
   background-color: #181f32;
   color: white;
   margin-bottom: 35px;
-  padding: 70px 30px ;
+  padding: 65px 30px;
   width: 595px;
   border-radius: 10px;
   font-size: 50px;
+  min-height: 20px;
+  display: flex;
+  align-items: center; 
+  justify-content: flex-start; 
+  overflow:hidden;
 }
+
 
 .calculator-body {
   display: grid;
@@ -53,20 +59,24 @@ button {
   color: #3b4664;
   margin: 10px;
   text-align: center;
-  padding: 15px 30px;
+  padding: 15px 33px;
   font-size: 40px;
-  border-radius: 10px;
+  border-radius: 13px;
   font-family: 'League Spartan', sans-serif;
   font-weight: 700;
+  border: none;
+  box-shadow: 0px 5px 0px #b5a398;
 }
 
 button#del,
 button#reset {
   background-color: #647299;
   color: white;
+  box-shadow: 0px 5px 0px #414d75;
 }
 
 button#equals {
   background-color: #d13f30;
   color: white;
+  box-shadow: 0px 5px 0px #992315;
 }

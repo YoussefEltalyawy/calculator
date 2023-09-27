@@ -26,6 +26,9 @@ let displayValue;
 let isOperationInProgress;
 
 window.addEventListener("keydown", function(e) {
+  if(e.key == "/") {
+    e.preventDefault(); 
+  }
   const key = document.querySelector(`button[data-key='${e.key}']`)
   key.click();
 });
