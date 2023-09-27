@@ -25,6 +25,11 @@ let secondNumberStr = "";
 let displayValue;
 let isOperationInProgress;
 
+window.addEventListener("keydown", function(e) {
+  const key = document.querySelector(`button[data-key='${e.key}']`)
+  key.click();
+});
+
 function add(firstNumber, secondNumber) {
   return firstNumber + secondNumber;
 }
@@ -114,7 +119,6 @@ delBtn.addEventListener("click", function () {
 decimalBtn.addEventListener("click", function () {
   if (calculatorDisplay.textContent.includes(".")) {
     decimalBtn.disabled = true;
-    console.log("Decimal True");
   }
 });
 
@@ -131,8 +135,6 @@ equals.addEventListener("click", function () {
     });
     resetBtn.disabled = false;
   }
-  console.log(firstNumberStr, secondNumberStr, firstOperator);
-  console.log(displayValue);
   calculatorDisplay.textContent = displayValue;
   isOperationInProgress = false;
   displayValue = calculatorDisplay.textContent;
@@ -156,19 +158,14 @@ function parseNumbers() {
   secondNumberStr = displayValue.substring(operatorPosition + 1);
 
   secondOperator = secondNumberStr[secondNumberStr.length - 1];
-  console.log(secondOperator + "second operator here the shit work");
 
   if (firstNumberStr && secondNumberStr) {
-    console.log(firstNumberStr);
-    console.log(secondNumberStr);
     isOperationInProgress = true;
   }
 }
 //Function responsible for the pair behaviour (when an operator is clicked twice)
 function pairBehaviour() {
   if (isOperationInProgress) {
-    console.log("busy from function");
-    console.log(firstOperator);
     displayValue = operate(
       Number(firstNumberStr),
       Number(secondNumberStr),
